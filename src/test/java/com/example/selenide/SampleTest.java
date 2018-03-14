@@ -22,14 +22,14 @@ public class SampleTest {
 
     @Before
     public void before(){
-        Configuration.browser = WebDriverRunner.GECKO;
+        Configuration.browser = WebDriverRunner.FIREFOX;
     }
 
     @Test
     public void 正常系確認() {
         InputPage inputPage = open("http://example.selenium.jp/reserveApp/", InputPage.class);
-        inputPage.setReserveYear("2017");
-        inputPage.setReserveMonth("10");
+        inputPage.setReserveYear("2018");
+        inputPage.setReserveMonth("5");
         inputPage.setReserveDay("1");
         inputPage.setReserveTerm("2");
         inputPage.setBreakfastOn();
@@ -38,13 +38,13 @@ public class SampleTest {
         inputPage.setPlanA(false);
         CheckInfoPage checkPage = inputPage.clickGotoNext();
         assertThat(checkPage.getErrorCheckResult(), is(""));
-        assertThat(checkPage.getDateFrom(), is("2017年10月1日"));
-        assertThat(checkPage.getDateTo(), is("2017年10月3日"));
+        assertThat(checkPage.getDateFrom(), is("2018年5月1日"));
+        assertThat(checkPage.getDateTo(), is("2018年5月3日"));
         assertThat(checkPage.getDaysCount(), is("2"));
         assertThat(checkPage.getHeadcount(), is("1"));
         assertThat(checkPage.getBfOrder(), is("あり"));
         assertThat(checkPage.getGuestName(), is("東京太郎"));
-        assertThat(checkPage.getPrice(), is("17750"));
+        assertThat(checkPage.getPrice(), is("16000"));
         FinalConfirmPage finalPage = checkPage.doCommit();
         assertThat(finalPage.getErrorCheckResult(), is(""));
     }
